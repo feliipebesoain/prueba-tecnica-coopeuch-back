@@ -17,4 +17,5 @@ public class NewTareaRequest {
     @NotNull(message = "La vigencia es obligatoria")
     private Boolean vigente;
 
+
 }

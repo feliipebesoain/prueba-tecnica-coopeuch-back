@@ -48,7 +48,7 @@ public class TareasController {
         Tarea tarea = new Tarea(request);
         Tarea response = this.tareasService.updateTarea(tarea);
         if (response != null) {
-            return new ResponseEntity<>(this.tareasService.saveTarea(response), HttpStatus.OK);
+            return new ResponseEntity<>(response, HttpStatus.OK);
         }
         return new ResponseEntity<>("No se encontró la tarea", HttpStatus.BAD_REQUEST);
     }
