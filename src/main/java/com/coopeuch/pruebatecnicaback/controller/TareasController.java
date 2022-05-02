@@ -1,7 +1,8 @@
 package com.coopeuch.pruebatecnicaback.controller;
 
 import com.coopeuch.pruebatecnicaback.domain.Tarea;
-import com.coopeuch.pruebatecnicaback.dto.TareaDTO;
+import com.coopeuch.pruebatecnicaback.dto.EditTareaRequest;
+import com.coopeuch.pruebatecnicaback.dto.NewTareaRequest;
 import com.coopeuch.pruebatecnicaback.service.TareasService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
 import java.util.List;
 
 
@@ -36,14 +38,14 @@ public class TareasController {
     }
 
     @PostMapping()
-    public ResponseEntity<Tarea> saveTarea(@RequestBody TareaDTO tareaDTO) {
-        Tarea tarea = new Tarea(tareaDTO);
+    public ResponseEntity<Tarea> createTarea(@Valid @RequestBody NewTareaRequest request) {
+        Tarea tarea = new Tarea(request);
         return new ResponseEntity<>(this.tareasService.saveTarea(tarea), HttpStatus.OK);
     }
 
     @PutMapping()
-    public ResponseEntity<Object> updateTarea(@RequestBody TareaDTO tareaDTO) {
-        Tarea tarea = new Tarea(tareaDTO);
+    public ResponseEntity<Object> updateTarea(@RequestBody EditTareaRequest request) {
+        Tarea tarea = new Tarea(request);
         Tarea response = this.tareasService.updateTarea(tarea);
         if (response != null) {
             return new ResponseEntity<>(this.tareasService.saveTarea(response), HttpStatus.OK);

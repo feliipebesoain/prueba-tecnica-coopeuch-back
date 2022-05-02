@@ -1,12 +1,12 @@
 package com.coopeuch.pruebatecnicaback.domain;
 
-import com.coopeuch.pruebatecnicaback.dto.TareaDTO;
+import com.coopeuch.pruebatecnicaback.dto.EditTareaRequest;
+import com.coopeuch.pruebatecnicaback.dto.NewTareaRequest;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.GenericGenerator;
 import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.Entity;
@@ -39,10 +39,15 @@ public class Tarea implements Serializable {
 
     private Boolean vigente;
 
-    public Tarea(TareaDTO tareaDTO) {
-        this.identificador = tareaDTO.getIdentificador();
-        this.descripcion = tareaDTO.getDescripcion();
-        this.fechaCreacion = tareaDTO.getFechaCreacion();
-        this.vigente = tareaDTO.isVigente();
+    public Tarea(NewTareaRequest request) {
+        this.descripcion = request.getDescripcion();
+        this.vigente = request.getVigente();
     }
+
+    public Tarea(EditTareaRequest request) {
+        this.identificador = request.getIdentificador();
+        this.descripcion = request.getDescripcion();
+        this.vigente = request.getVigente();
+    }
+
 }
