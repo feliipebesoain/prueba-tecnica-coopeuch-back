@@ -5,6 +5,7 @@ import com.coopeuch.pruebatecnicaback.repository.TareasRepository;
 import com.coopeuch.pruebatecnicaback.service.TareasService;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,6 +25,7 @@ public class TareasServiceImpl implements TareasService {
 
     @Override
     public Tarea saveTarea(Tarea tarea) {
+        tarea.setFechaCreacion(LocalDateTime.now());
         return tareaRepository.save(tarea);
     }
 
